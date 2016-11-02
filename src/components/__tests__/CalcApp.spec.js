@@ -203,6 +203,31 @@ it('4 * 5 = 0 -> 0', () => {
 });
 
 
+it('1 + 2 = 3 = -> 5', () => {
+  const app = mount(<CalcApp />);
+
+  const rows = app.find('.calc-row');
+
+  const row3 = rows.at(3);
+  const btn1 = row3.find(CalcButton).at(0);
+  const btn2 = row3.find(CalcButton).at(1);
+  const btn3 = row3.find(CalcButton).at(2);
+  const btnAdd = row3.find(CalcButton).at(3);
+
+  const row4 = rows.at(4);
+  const btnEqual = row4.find(CalcButton).at(2);
+
+  btn1.simulate('click');
+  btnAdd.simulate('click');
+  btn2.simulate('click');
+  btnEqual.simulate('click');
+  btn3.simulate('click');
+  btnEqual.simulate('click');
+
+  expect(app.find('.calc-display').text()).toBe('5');
+});
+
+
 it('AC should clear state', () => {
   const app = mount(<CalcApp />);
 
