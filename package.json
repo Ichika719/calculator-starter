@@ -5,7 +5,8 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint src",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack",
+    "build:watch": "npm run build -- --watch",
     "start": "serve ."
   },
   "repository": {
