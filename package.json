@@ -3,10 +3,18 @@
   "version": "0.0.1",
   "description": "In-class practice. Using webpack, babel, react",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/web-seminar/calculator-starter.git"
   },
+  "devDependencies": {
+    "eslint": "^3.9.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^2.0.1",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.5.0"
+  }
 }
