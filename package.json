@@ -1,0 +1,12 @@
+{
+  "name": "calculator-starter",
+  "version": "0.0.1",
+  "description": "In-class practice. Using webpack, babel, react",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/web-seminar/calculator-starter.git"
+  },
+}
