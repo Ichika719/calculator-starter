@@ -177,6 +177,32 @@ it('7 8 9 - 8 - -> 781', () => {
 });
 
 
+it('4 * 5 = 0 -> 0', () => {
+  const app = mount(<CalcApp />);
+
+  const rows = app.find('.calc-row');
+
+  const row2 = rows.at(2);
+  const btn4 = row2.find(CalcButton).at(0);
+  const btn5 = row2.find(CalcButton).at(1);
+
+  const row1 = rows.at(1);
+  const btnMultiple = row1.find(CalcButton).at(3);
+
+  const row4 = rows.at(4);
+  const btn0 = row4.find(CalcButton).at(0);
+  const btnEqual = row4.find(CalcButton).at(2);
+
+  btn4.simulate('click');
+  btnMultiple.simulate('click');
+  btn5.simulate('click');
+  btnEqual.simulate('click');
+  btn0.simulate('click');
+
+  expect(app.find('.calc-display').text()).toBe('0');
+});
+
+
 it('AC should clear state', () => {
   const app = mount(<CalcApp />);
 
