@@ -25,5 +25,9 @@
     "eslint-plugin-react": "^6.5.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.3"
+  },
+  "dependencies": {
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2"
   }
 }
