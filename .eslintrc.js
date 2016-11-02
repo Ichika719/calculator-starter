@@ -11,6 +11,7 @@ module.exports = {
     'no-mixed-operators': 0,
   },
   'env': {
-    'browser': true, // let 'window', 'document' defined
+    browser: true, // let 'window', 'document' defined
+    jest: true,
   }
 };
