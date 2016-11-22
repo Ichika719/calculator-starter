@@ -4,6 +4,8 @@ import { mount } from 'enzyme';
 import CalcApp from '../CalcApp';
 import CalcButton from '../CalcButton';
 
+console.warn = jest.genMockFn();
+
 it('render button correctly', () => {
   const app = mount(<CalcApp />);
 
@@ -103,6 +105,28 @@ it('7 - 8 -> 8', () => {
   expect(app.find('.calc-display').text()).toBe('8');
 });
 
+it('7 - + 8 -> 15', () => {
+  const app = mount(<CalcApp />);
+
+  const rows = app.find('.calc-row');
+
+  const row1 = rows.at(1);
+  const btn7 = row1.find(CalcButton).at(0);
+  const btn8 = row1.find(CalcButton).at(1);
+
+  const row2 = rows.at(2);
+  const btnMinus = row2.find(CalcButton).at(3);
+
+  const row3 = rows.at(3);
+  const btnAdd = row3.find(CalcButton).at(3);
+
+  btn7.simulate('click');
+  btnMinus.simulate('click');
+  btnAdd.simulate('click');
+  btn8.simulate('click');
+
+  expect(app.find('.calc-display').text()).toBe('8');
+});
 
 it('7 - + 8 -> 15', () => {
   const app = mount(<CalcApp />);
@@ -128,28 +152,32 @@ it('7 - + 8 -> 15', () => {
 });
 
 
-it('7 - + 8 - -> 15', () => {
+it('16 - / 8 - -> 2', () => {
   const app = mount(<CalcApp />);
 
   const rows = app.find('.calc-row');
 
+  const row0 = rows.at(0);
+  const btnDiv = row0.find(CalcButton).at(3);
+
   const row1 = rows.at(1);
-  const btn7 = row1.find(CalcButton).at(0);
   const btn8 = row1.find(CalcButton).at(1);
 
   const row2 = rows.at(2);
   const btnMinus = row2.find(CalcButton).at(3);
+  const btn6 = row2.find(CalcButton).at(2);
 
   const row3 = rows.at(3);
-  const btnAdd = row3.find(CalcButton).at(3);
+  const btn1 = row3.find(CalcButton).at(0);
 
-  btn7.simulate('click');
+  btn1.simulate('click');
+  btn6.simulate('click');
   btnMinus.simulate('click');
-  btnAdd.simulate('click');
+  btnDiv.simulate('click');
   btn8.simulate('click');
   btnMinus.simulate('click');
 
-  expect(app.find('.calc-display').text()).toBe('15');
+  expect(app.find('.calc-display').text()).toBe('2');
 });
 
 
@@ -203,31 +231,6 @@ it('4 * 5 = 0 -> 0', () => {
 });
 
 
-it('1 + 2 = 3 = -> 5', () => {
-  const app = mount(<CalcApp />);
-
-  const rows = app.find('.calc-row');
-
-  const row3 = rows.at(3);
-  const btn1 = row3.find(CalcButton).at(0);
-  const btn2 = row3.find(CalcButton).at(1);
-  const btn3 = row3.find(CalcButton).at(2);
-  const btnAdd = row3.find(CalcButton).at(3);
-
-  const row4 = rows.at(4);
-  const btnEqual = row4.find(CalcButton).at(2);
-
-  btn1.simulate('click');
-  btnAdd.simulate('click');
-  btn2.simulate('click');
-  btnEqual.simulate('click');
-  btn3.simulate('click');
-  btnEqual.simulate('click');
-
-  expect(app.find('.calc-display').text()).toBe('5');
-});
-
-
 it('AC should clear state', () => {
   const app = mount(<CalcApp />);
 
@@ -246,3 +249,15 @@ it('AC should clear state', () => {
   expect(app.state()).toEqual(initialState);
 });
 
+
+it('+/- should call console.warn', () => {
+  const app = mount(<CalcApp />);
+
+  const rows = app.find('.calc-row');
+  const row0 = rows.at(0);
+  const negative = row0.find(CalcButton).at(1);
+
+  negative.simulate('click');
+
+  expect(console.warn).toBeCalled();
+});

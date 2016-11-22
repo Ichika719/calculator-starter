@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "In-class practice. Using webpack, babel, react",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "lint": "eslint src",
     "build": "webpack",
     "build:watch": "npm run build -- --watch",
